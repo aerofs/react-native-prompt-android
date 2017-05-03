@@ -7,12 +7,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.Button;
 
 import javax.annotation.Nullable;
 
@@ -170,7 +172,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         positive.setTextColor(Color.parseColor("#FF7266"));
         Button negative = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEGATIVE);
         negative.setTextColor(Color.parseColor("#FF7266"));
-        Button positive = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEUTRAL);
-        positive.setTextColor(Color.parseColor("#FF7266"));
+        Button neutral = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEUTRAL);
+        neutral.setTextColor(Color.parseColor("#FF7266"));
     }
 }
