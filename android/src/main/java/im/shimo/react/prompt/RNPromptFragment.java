@@ -93,7 +93,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         String typeString = arguments.getString(ARG_TYPE);
 
         if (typeString == null) {
-            typeString = "plain-text";
+            typeString = "none";
         }
 
         if (arguments.containsKey(ARG_TYPE)) {
@@ -102,11 +102,16 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
                     type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
                     break;
                 case "plain-text":
-                default:
                     type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+                case "none":
+                default:
             }
         }
 
+        if (typeString.equals("none")) {
+            return alertDialog;
+        }
+        
         input.setInputType(type);
         fragment.setTextInput(input);
 
@@ -145,7 +150,7 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (mListener != null) {
+        if (mListener != null && mInputText != null) {
             mListener.onConfirm(which, mInputText.getText().toString());
         }
     }
@@ -156,5 +161,16 @@ public class RNPromptFragment extends DialogFragment implements DialogInterface.
         if (mListener != null) {
             mListener.onDismiss(dialog);
         }
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        Button positive = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
+        positive.setTextColor(Color.parseColor("#FF7266"));
+        Button negative = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEGATIVE);
+        negative.setTextColor(Color.parseColor("#FF7266"));
+        Button positive = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEUTRAL);
+        positive.setTextColor(Color.parseColor("#FF7266"));
     }
 }
